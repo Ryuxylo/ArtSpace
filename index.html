@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtSpace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CONNEXION / INSCRIPTION -->
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <h1 class="logo">Art<span>Space</span></h1>
+      <p class="subtitle">Ton univers artistique commence ici.</p>
+
+      <div class="auth-tabs">
+        <button id="loginTab" class="selected">Connexion</button>
+        <button id="signupTab">Inscription</button>
+      </div>
+
+      <form id="authForm">
+        <div id="usernameGroup" class="hidden">
+          <label for="authUsername">Nom d'utilisateur</label>
+          <input id="authUsername" type="text" placeholder="Ton pseudo">
+        </div>
+
+        <label for="authEmail">Adresse e-mail</label>
+        <input id="authEmail" type="email" placeholder="exemple@mail.com" required>
+
+        <label for="authPassword">Mot de passe</label>
+        <input id="authPassword" type="password" minlength="6" placeholder="6 caractères minimum" required>
+
+        <button class="primary-button full-button" id="authSubmit" type="submit">
+          Se connecter
+        </button>
+
+        <p id="authMessage" class="form-message"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- APPLICATION -->
+  <div id="appScreen" class="app hidden">
+
+    <!-- NAVIGATION -->
+    <aside class="sidebar">
+      <h1 class="logo">Art<span>Space</span></h1>
+
+      <nav class="navigation">
+        <button class="nav-button active" data-page="home">⌂ <span>Accueil</span></button>
+        <button class="nav-button" data-page="discover">⌕ <span>Découvrir</span></button>
+        <button class="nav-button" data-page="arts">▧ <span>Mes arts</span></button>
+        <button class="nav-button" data-page="messages">✉ <span>Messages</span></button>
+        <button class="nav-button" data-page="profile">◉ <span>Mon profil</span></button>
+        <button class="nav-button" data-page="settings">⚙ <span>Paramètres</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button id="sidebarLogout" class="logout-button">↪ Déconnexion</button>
+      </div>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content">
+
+      <header class="topbar">
+        <h2 id="pageTitle">Accueil</h2>
+        <div class="topbar-user">
+          <img id="smallAvatar" class="small-avatar" alt="Photo de profil">
+          <span id="topUsername">Artiste</span>
+        </div>
+      </header>
+
+      <!-- ACCUEIL -->
+      <section id="home" class="page active">
+        <div class="hero">
+          <p class="eyebrow">TON ESPACE CRÉATIF</p>
+          <h1>Exprime ton imagination.</h1>
+          <p>Partage tes œuvres, découvre de nouveaux univers et laisse parler ta créativité.</p>
+          <button class="primary-button" data-go="arts">＋ Importer une création</button>
+        </div>
+
+        <div class="section-heading">
+          <h2>Dernières créations</h2>
+          <button class="text-button" data-go="discover">Tout découvrir →</button>
+        </div>
+
+        <div id="homeGallery" class="gallery">
+          <p class="empty-message">Aucune création pour le moment.</p>
+        </div>
+      </section>
+
+      <!-- DÉCOUVRIR -->
+      <section id="discover" class="page">
+        <div class="page-intro">
+          <p class="eyebrow">EXPLORATION</p>
+          <h1>Découvrir</h1>
+          <p>Explore les œuvres publiées sur cet appareil.</p>
+        </div>
+
+        <div id="discoverGallery" class="gallery">
+          <p class="empty-message">Aucune création à découvrir pour le moment.</p>
+        </div>
+      </section>
+
+      <!-- MES ARTS -->
+      <section id="arts" class="page">
+        <div class="page-intro">
+          <p class="eyebrow">TA GALERIE PERSONNELLE</p>
+          <h1>Mes arts</h1>
+          <p>Ajoute tes créations et construis ta galerie.</p>
+        </div>
+
+        <div class="upload-box">
+          <h2>Publier une création</h2>
+
+          <label for="artImage">Image de ton œuvre</label>
+          <input id="artImage" type="file" accept="image/*">
+
+          <label for="artTitle">Titre</label>
+          <input id="artTitle" type="text" maxlength="60" placeholder="Le nom de ton œuvre">
+
+          <label for="artDescription">Description</label>
+          <textarea id="artDescription" maxlength="500" placeholder="Raconte-nous quelque chose sur ton œuvre..."></textarea>
+
+          <button id="publishArt" class="primary-button">Publier mon œuvre</button>
+          <p id="uploadMessage" class="form-message"></p>
+        </div>
+
+        <div class="section-heading">
+          <h2>Mes créations</h2>
+        </div>
+
+        <div id="myGallery" class="gallery">
+          <p class="empty-message">Tu n'as pas encore publié d'œuvre.</p>
+        </div>
+      </section>
+
+      <!-- MESSAGES ET CONTACTS -->
+      <section id="messages" class="page">
+        <div class="page-intro">
+          <p class="eyebrow">DISCUSSIONS</p>
+          <h1>Messages</h1>
+          <p>Retrouve tes contacts et discute avec eux.</p>
+        </div>
+
+        <div class="chat-layout">
+
+          <aside class="chat-sidebar">
+            <div class="chat-section">
+              <h2>Rechercher</h2>
+              <input id="userSearch" type="search" placeholder="Chercher un utilisateur...">
+              <div id="userSearchResults" class="chat-user-list">
+                <p class="chat-hint">Recherche un utilisateur pour lui envoyer une demande.</p>
+              </div>
+            </div>
+
+            <div class="chat-section">
+              <h2>Demandes reçues <span id="requestCount" class="count-badge">0</span></h2>
+              <div id="friendRequests" class="request-list">
+                <p class="chat-hint">Aucune demande reçue.</p>
+              </div>
+            </div>
+
+            <div class="chat-section">
+              <h2>Mes contacts</h2>
+              <div id="friendList" class="chat-user-list">
+                <p class="chat-hint">Tu n'as pas encore de contact.</p>
+              </div>
+            </div>
+          </aside>
+
+          <section class="chat-main">
+            <div id="chatEmpty" class="chat-empty">
+              <div class="chat-empty-icon">✉</div>
+              <h2>Bienvenue dans tes messages</h2>
+              <p>Choisis un contact pour commencer une discussion.</p>
+            </div>
+
+            <div id="conversation" class="conversation hidden">
+              <header class="conversation-header">
+                <img id="chatAvatar" src="" alt="Avatar">
+                <div>
+                  <h2 id="chatUsername">Contact</h2>
+                  <p>Discussion privée</p>
+                </div>
+                <button id="closeConversation" class="close-chat-button" type="button" aria-label="Fermer">×</button>
+              </header>
+
+              <div id="chatMessages" class="chat-messages"></div>
+
+              <form id="chatForm" class="chat-composer">
+                <textarea id="chatInput" maxlength="1000" rows="1" placeholder="Écris ton message..." required></textarea>
+                <button type="submit" class="primary-button">Envoyer</button>
+              </form>
+
+              <p id="messageStatus" class="form-message"></p>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <!-- PROFIL -->
+      <section id="profile" class="page">
+        <div class="page-intro">
+          <p class="eyebrow">TON IDENTITÉ ARTISTIQUE</p>
+          <h1>Mon profil</h1>
+        </div>
+
+        <div class="profile-card">
+          <div id="profileBanner" class="profile-banner"></div>
+
+          <div class="profile-details">
+            <img id="profileAvatar" class="profile-avatar" alt="Photo de profil">
+
+            <h2 id="profileDisplayName">Artiste</h2>
+            <p id="profileDisplayBio">Aucune biographie pour le moment.</p>
+            <p id="profileEmail" class="muted-text"></p>
+          </div>
+        </div>
+
+        <div class="upload-box">
+          <h2>Modifier mon profil</h2>
+
+          <label for="editUsername">Nom d'utilisateur</label>
+          <input id="editUsername" type="text" maxlength="30">
+
+          <label for="editBio">Biographie</label>
+          <textarea id="editBio" maxlength="250" placeholder="Présente-toi..."></textarea>
+
+          <label for="avatarUpload">Photo de profil</label>
+          <input id="avatarUpload" type="file" accept="image/*">
+
+          <label for="bannerUpload">Bannière</label>
+          <input id="bannerUpload" type="file" accept="image/*">
+
+          <button id="saveProfile" class="primary-button">Enregistrer mon profil</button>
+          <p id="profileMessage" class="form-message"></p>
+        </div>
+
+        <div class="section-heading">
+          <h2>Mes publications</h2>
+        </div>
+
+        <div id="profileGallery" class="gallery">
+          <p class="empty-message">Aucune publication.</p>
+        </div>
+      </section>
+
+      <!-- PARAMÈTRES -->
+      <section id="settings" class="page">
+        <div class="page-intro">
+          <p class="eyebrow">PERSONNALISATION</p>
+          <h1>Paramètres</h1>
+          <p>Configure ton expérience ArtSpace.</p>
+        </div>
+
+        <div class="settings-card">
+          <h2>Apparence</h2>
+          <p>Choisis le thème de ton application.</p>
+
+          <select id="themeSelect">
+            <option value="dark">Thème sombre</option>
+            <option value="light">Thème clair</option>
+          </select>
+        </div>
+
+        <div class="settings-card">
+          <h2>Confidentialité</h2>
+          <p>Gérer l'affichage de ton adresse e-mail sur ton profil.</p>
+
+          <label class="checkbox-line">
+            <input type="checkbox" id="privateEmail">
+            Masquer mon adresse e-mail sur mon profil
+          </label>
+        </div>
+
+        <div class="settings-card">
+          <h2>Compte</h2>
+          <p id="settingsEmail"></p>
+          <button id="settingsLogout" class="secondary-button">Se déconnecter</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
